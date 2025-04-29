@@ -1,0 +1,13 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "A simple Express server",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
