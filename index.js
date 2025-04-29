@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 5500;
 
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'Pages')));
 
 let obj = {
     name: 'John Doe',
