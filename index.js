@@ -1,8 +1,10 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 
-const port = process.env.PORT || 8080;
+
+const port = process.env.PORT || 5500;
 
 app.use(cors());
 
@@ -23,11 +25,11 @@ let contact = {
 };
 
 app.get('/', (req, res) => {
-    res.send('Accessed the root route');
+    res.sendFile(__dirname + '/Pages/root.html');
 });
 
 app.get('/about', (req, res) => {
-    res.send(obj);
+    res.sendFile(__dirname + '/Pages/about.html');
 });
 
 app.get('/contact', (req, res) => {
