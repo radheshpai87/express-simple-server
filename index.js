@@ -8,7 +8,7 @@ const port = process.env.PORT || 5500;
 
 app.use(cors());
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, 'views'));
 
 let obj = {
     name: 'John Doe',
@@ -38,12 +38,12 @@ app.get('/contact', (req, res) => {
     res.send(contact);
 });
 
-app.get('/random'), (req, res) => {
+app.get('/random', (req, res) => {
     const randomNumber = Math.floor(Math.random() * 100 + 1)
     res.render("random.ejs", {
         num: randomNumber
     });
-}
+});
 
 app.get('*', (req, res) => {
     res.status(404).send('You suck at hacking!');
