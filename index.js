@@ -7,7 +7,8 @@ const app = express();
 const port = process.env.PORT || 5500;
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'Pages')));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
 let obj = {
     name: 'John Doe',
@@ -26,16 +27,23 @@ let contact = {
 };
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/Pages/root.html');
+    res.send("Hello World, You are in the root directory");
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/Pages/about.html');
+    res.send(obj);
 });
 
 app.get('/contact', (req, res) => {
     res.send(contact);
 });
+
+app.get('/random'), (req, res) => {
+    const randomNumber = Math.floor(Math.random() * 100 + 1)
+    res.render("random.ejs", {
+        num: randomNumber
+    });
+}
 
 app.get('*', (req, res) => {
     res.status(404).send('You suck at hacking!');
