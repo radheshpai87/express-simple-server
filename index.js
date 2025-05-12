@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const app = express();
-
+const instaData = require('./data.json');
 
 const port = process.env.PORT || 5500;
 
@@ -45,18 +45,17 @@ app.get('/random', (req, res) => {
     });
 });
 
-// app.get('/ig/:username', (req, res) => {
-//     const instaData = require('./data.json');
-//     const { username } = req.params;
+app.get('/ig/:username', (req, res) => {
+    const { username } = req.params;
 
-//     // Check if the requested username exists in our data
-//     if (instaData[username]) {
-//         res.render("instagram.ejs", { profile: instaData[username], username, notFound: false });
-//     } else {
-//         // Instead of sending 404, render the template with a notFound flag
-//         res.render("instagram.ejs", { notFound: true, username });
-//     }
-// })
+    // Check if the requested username exists in our data
+    if (instaData[username]) {
+        res.render("instagram.ejs", { profile: instaData[username], username, notFound: false });
+    } else {
+        // Instead of sending 404, render the template with a notFound flag
+        res.render("instagram.ejs", { notFound: true, username });
+    }
+})
 
 app.get('*', (req, res) => {
     res.status(404).send('You suck at hacking!');
