@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Profile - @<%= profile.name %>
+    <title>Instagram Profile - <%= notFound ? 'Not Found' : '@' + profile.name %>
     </title>
     <style>
         body {
@@ -68,33 +68,51 @@
 </head>
 
 <body>
-    <div class="header">
-        <h2>This page belongs to @<%= profile.name %>
-        </h2>
-    </div>
-
-    <div class="stats">
-        <h3>Followers: <%= profile.followers %>
-        </h3>
-        <h3>Following: <%= profile.following %>
-        </h3>
-    </div>
-
-    <div class="buttons">
-        <button>Follow</button>
-        <button>Message</button>
-    </div>
-
-    <div class="gallery">
-        <% profile.posts.forEach(post=> { %>
-            <div class="post">
-                <img src="<%= post.image %>" alt="Post by <%= profile.name %>">
-                <div class="post-stats">
-                    ❤️ <%= post.likes %> &nbsp;&nbsp; 💬 <%= post.comments %>
-                </div>
+    <% if (notFound) { %>
+        <div class="header" style="flex-direction: column; text-align: center;">
+            <h2>😞 Profile Not Found</h2>
+            <p>Sorry, the profile <strong>@<%= username %></strong> doesn't exist.</p>
+            <div style="margin-top: 20px;">
+                <p>Check out these available profiles:</p>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li><a href="/ig/cats" style="color: #0095f6; text-decoration: none;">@cats</a></li>
+                    <li><a href="/ig/dogs" style="color: #0095f6; text-decoration: none;">@dogs</a></li>
+                    <li><a href="/ig/travel" style="color: #0095f6; text-decoration: none;">@travel</a></li>
+                    <li><a href="/ig/food" style="color: #0095f6; text-decoration: none;">@food</a></li>
+                    <li><a href="/ig/fitness" style="color: #0095f6; text-decoration: none;">@fitness</a></li>
+                    <li><a href="/ig/tech" style="color: #0095f6; text-decoration: none;">@tech</a></li>
+                </ul>
             </div>
-            <% }) %>
-    </div>
+        </div>
+        <% } else { %>
+            <div class="header">
+                <h2>This page belongs to @<%= profile.name %>
+                </h2>
+            </div>
+
+            <div class="stats">
+                <h3>Followers: <%= profile.followers %>
+                </h3>
+                <h3>Following: <%= profile.following %>
+                </h3>
+            </div>
+
+            <div class="buttons">
+                <button>Follow</button>
+                <button>Message</button>
+            </div>
+
+            <div class="gallery">
+                <% profile.posts.forEach(post=> { %>
+                    <div class="post">
+                        <img src="<%= post.image %>" alt="Post by <%= profile.name %>">
+                        <div class="post-stats">
+                            ❤️ <%= post.likes %> &nbsp;&nbsp; 💬 <%= post.comments %>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>
 </body>
 
 </html>

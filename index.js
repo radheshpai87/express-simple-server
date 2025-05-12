@@ -51,9 +51,10 @@ app.get('/ig/:username', (req, res) => {
 
     // Check if the requested username exists in our data
     if (instaData[username]) {
-        res.render("instagram.ejs", { profile: instaData[username], username });
+        res.render("instagram.ejs", { profile: instaData[username], username, notFound: false });
     } else {
-        res.status(404).send("Profile not found");
+        // Instead of sending 404, render the template with a notFound flag
+        res.render("instagram.ejs", { notFound: true, username });
     }
 })
 
