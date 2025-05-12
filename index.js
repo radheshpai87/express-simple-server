@@ -46,8 +46,15 @@ app.get('/random', (req, res) => {
 });
 
 app.get('/ig/:username', (req, res) => {
-    let { username } = req.params;
-    res.render("instagram.ejs", {name: username});
+    const instaData = require('./data.json');
+    const { username } = req.params;
+
+    // Check if the requested username exists in our data
+    if (instaData[username]) {
+        res.render("instagram.ejs", { profile: instaData[username], username });
+    } else {
+        res.status(404).send("Profile not found");
+    }
 })
 
 app.get('*', (req, res) => {
