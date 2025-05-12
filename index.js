@@ -45,6 +45,11 @@ app.get('/random', (req, res) => {
     });
 });
 
+app.get('/ig/:username', (req, res) => {
+    let { username } = req.params;
+    res.render("instagram.ejs", {name: username});
+})
+
 app.get('*', (req, res) => {
     res.status(404).send('You suck at hacking!');
 });
